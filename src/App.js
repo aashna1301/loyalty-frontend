@@ -11,7 +11,7 @@ function App() {
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
 
-  const backendURL = "https://loyalty-backend-zhzw.onrender.com";
+  const backendURL = "https://loyalty-backend-zhzw.onrender.com/api";
 
   const handleFetch = async () => {
     try {
