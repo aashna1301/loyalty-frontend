@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import AdminSummary from "./AdminSummary";
 
 function App() {
   const [phone, setPhone] = useState("");
@@ -10,6 +11,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
+  const [showAdmin, setShowAdmin] = useState(false);
 
   const backendURL = "https://loyalty-backend-zhzw.onrender.com/api";
 
@@ -73,91 +75,104 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <div className="card">
-        <div className="header">
-          <h1 className="shop-name">Gupta Showroom</h1>
-          <p className="tagline">A complete gift shop</p>
-        </div>
+  <div className="container">
+    <div className="card">
+      <button
+        className="secondary-btn"
+        onClick={() => setShowAdmin(!showAdmin)}
+      >
+        {showAdmin ? "🏠 Back to Loyalty App" : "📊 View Admin Summary"}
+      </button>
 
-        <div className="input-group">
-          <input
-            type="tel"
-            inputMode="numeric"
-            autoComplete="tel"
-            maxLength={10}
-            placeholder="Enter phone number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
-          />
-          <button className="primary-btn" onClick={handleFetch}>
-            Check Balance
-          </button>
-        </div>
-
-        <button className="secondary-btn" onClick={() => setShowModal(true)}>
-          ➕ Add New Customer
-        </button>
-
-        {customer && (
-          <div className="customer-card">
-            <h2>{customer.name}</h2>
-            <p>📞 {customer.phone}</p>
-            <h3>{customer.points} Points</h3>
+      {showAdmin ? (
+        <AdminSummary />
+      ) : (
+        <>
+          <div className="header">
+            <h1 className="shop-name">Gupta Showroom</h1>
+            <p className="tagline">A complete gift shop</p>
           </div>
-        )}
 
-        <div className="input-group">
-          <input
-            type="number"
-            inputMode="numeric"
-            placeholder="Enter amount / points"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          />
-        </div>
-
-        <div className="btn-group">
-          <button className="success-btn" onClick={handleAddPoints}>
-            ➕ Add Points
-          </button>
-          <button className="danger-btn" onClick={handleRedeem}>
-            🎁 Redeem
-          </button>
-        </div>
-
-        {message && <p className="message">{message}</p>}
-      </div>
-
-      {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h2>Add New Customer</h2>
+          <div className="input-group">
             <input
-              type="text"
-              placeholder="Customer Name"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel"
+              maxLength={10}
+              placeholder="Enter phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
             />
-            <input
-              type="text"
-              placeholder="Phone Number"
-              value={newPhone}
-              onChange={(e) => setNewPhone(e.target.value)}
-            />
-            <div className="modal-buttons">
-              <button className="success-btn" onClick={handleCreateCustomer}>
-                Save
-              </button>
-              <button className="danger-btn" onClick={() => setShowModal(false)}>
-                Cancel
-              </button>
+            <button className="primary-btn" onClick={handleFetch}>
+              Check Balance
+            </button>
+          </div>
+
+          <button className="secondary-btn" onClick={() => setShowModal(true)}>
+            ➕ Add New Customer
+          </button>
+
+          {customer && (
+            <div className="customer-card">
+              <h2>{customer.name}</h2>
+              <p>📞 {customer.phone}</p>
+              <h3>{customer.points} Points</h3>
             </div>
+          )}
+
+          <div className="input-group">
+            <input
+              type="number"
+              inputMode="numeric"
+              placeholder="Enter amount / points"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
           </div>
-        </div>
+
+          <div className="btn-group">
+            <button className="success-btn" onClick={handleAddPoints}>
+              ➕ Add Points
+            </button>
+            <button className="danger-btn" onClick={handleRedeem}>
+              🎁 Redeem
+            </button>
+          </div>
+
+          {message && <p className="message">{message}</p>}
+        </>
       )}
     </div>
-  );
+
+    {showModal && (
+      <div className="modal-overlay" onClick={() => setShowModal(false)}>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <h2>Add New Customer</h2>
+          <input
+            type="text"
+            placeholder="Customer Name"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Phone Number"
+            value={newPhone}
+            onChange={(e) => setNewPhone(e.target.value)}
+          />
+          <div className="modal-buttons">
+            <button className="success-btn" onClick={handleCreateCustomer}>
+              Save
+            </button>
+            <button className="danger-btn" onClick={() => setShowModal(false)}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+);
 }
 
 export default App;
