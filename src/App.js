@@ -110,6 +110,7 @@ function App() {
         <div className="input-group">
           <input
             type="number"
+            inputMode="numeric"
             placeholder="Enter amount / points"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
