@@ -77,13 +77,16 @@ function App() {
   return (
   <div className="container">
     <div className="card">
+      {/* toggle button always visible */}
       <button
         className="secondary-btn"
         onClick={() => setShowAdmin(!showAdmin)}
+        style={{ marginBottom: "10px" }}
       >
         {showAdmin ? "🏠 Back to Loyalty App" : "📊 View Admin Summary"}
       </button>
 
+      {/* conditional rendering for admin vs loyalty view */}
       {showAdmin ? (
         <AdminSummary />
       ) : (
@@ -144,6 +147,7 @@ function App() {
       )}
     </div>
 
+    {/* modal for new customer */}
     {showModal && (
       <div className="modal-overlay" onClick={() => setShowModal(false)}>
         <div className="modal" onClick={(e) => e.stopPropagation()}>
