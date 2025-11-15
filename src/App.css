@@ -266,3 +266,16 @@ body {
     border-radius: 16px;
   }
 }
+
+/* --- Step 5: safe area padding & breathing space --- */
+body {
+  padding-bottom: env(safe-area-inset-bottom, 0); /* iPhone notch area */
+}
+
+.card {
+  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0));
+}
+
+.message {
+  margin-bottom: 12px;
+}
