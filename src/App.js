@@ -82,10 +82,13 @@ function App() {
 
         <div className="input-group">
           <input
-            type="text"
+            type="tel"
+            inputMode="numeric"
+            autoComplete="tel"
+            maxLength={10}
             placeholder="Enter phone number"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
           />
           <button className="primary-btn" onClick={handleFetch}>
             Check Balance
