@@ -6,13 +6,20 @@ import AdminSummary from "./AdminSummary";
 function App() {
   const [phone, setPhone] = useState("");
   const [customer, setCustomer] = useState(null);
-  const [amount, setAmount] = useState("");
+  const [addAmount, setAddAmount] = useState("");
+  const [redeemPoints, setRedeemPoints] = useState("");
   const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [showAdmin, setShowAdmin] = useState(false);
 
+  useEffect(() => {
+  if (message) {
+    const timer = setTimeout(() => setMessage(""), 3000);
+    return () => clearTimeout(timer);
+  }
+}, [message]);
   const backendURL = "https://loyalty-backend-zhzw.onrender.com/api";
 
   const handleFetch = async () => {
@@ -32,32 +39,44 @@ function App() {
   };
 
   const handleAddPoints = async () => {
-    try {
-      await axios.post(`${backendURL}/add-points`, {
-        phone,
-        amount: Number(amount),
-      });
-      setMessage("✅ Points added successfully!");
-      handleFetch();
-      setAmount("");
-    } catch {
-      setMessage("Error adding points");
-    }
-  };
+  if (!addAmount || !phone) {
+    setMessage("⚠️ Please enter phone number and amount");
+    return;
+  }
+
+  try {
+    await axios.post(`${backendURL}/add-points`, {
+      phone,
+      amount: Number(addAmount),
+    });
+    setMessage("✅ Points added successfully!");
+    handleFetch();
+    setAddAmount("");
+  } catch (err) {
+    console.error("Error adding points:", err);
+    setMessage("❌ Error adding points");
+  }
+};
 
   const handleRedeem = async () => {
-    try {
-      await axios.post(`${backendURL}/redeem`, {
-        phone,
-        points: Number(amount),
-      });
-      setMessage("🎁 Points redeemed successfully!");
-      handleFetch();
-      setAmount("");
-    } catch {
-      setMessage("Error redeeming points");
-    }
-  };
+  if (!redeemPoints || !phone) {
+    setMessage("⚠️ Please enter phone number and points");
+    return;
+  }
+
+  try {
+    await axios.post(`${backendURL}/redeem`, {
+      phone,
+      points: Number(redeemPoints),
+    });
+    setMessage("🎁 Points redeemed successfully!");
+    handleFetch();
+    setRedeemPoints("");
+  } catch (err) {
+    console.error("Error redeeming points:", err);
+    setMessage("❌ Error redeeming points");
+  }
+};
 
   const handleCreateCustomer = async () => {
     try {
@@ -123,58 +142,80 @@ function App() {
             </div>
           )}
 
-          <div className="input-group">
-            <input
-              type="number"
-              inputMode="numeric"
-              placeholder="Enter amount / points"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-            />
-          </div>
+              {/* Add Points Section */}
+              <div className="section-group">
+                <label className="section-label">💰 Add Amount</label>
+                <div className="input-group">
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    placeholder="Enter amount to add"
+                    value={addAmount}
+                    onChange={(e) => setAddAmount(e.target.value)}
+                  />
+                  <button className="success-btn" onClick={handleAddPoints}>
+                    ➕ Add Points
+                  </button>
+                </div>
+              </div>
 
-          <div className="btn-group">
-            <button className="success-btn" onClick={handleAddPoints}>
-              ➕ Add Points
-            </button>
-            <button className="danger-btn" onClick={handleRedeem}>
-              🎁 Redeem
-            </button>
-          </div>
+              {/* Redeem Points Section */}
+              <div className="section-group">
+                <label className="section-label">🎁 Redeem Points</label>
+                <div className="input-group">
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    placeholder="Enter points to redeem"
+                    value={redeemPoints}
+                    onChange={(e) => setRedeemPoints(e.target.value)}
+                  />
+                  <button className="danger-btn" onClick={handleRedeem}>
+                    Redeem
+                  </button>
+                </div>
+              </div>
+  
 
-          {message && <p className="message">{message}</p>}
+              {message && (
+                <p key={message} className="message fade-in">
+                  {message}
+                </p>
+              )}
         </>
       )}
     </div>
 
     {/* modal for new customer */}
     {showModal && (
-      <div className="modal-overlay" onClick={() => setShowModal(false)}>
-        <div className="modal" onClick={(e) => e.stopPropagation()}>
-          <h2>Add New Customer</h2>
-          <input
-            type="text"
-            placeholder="Customer Name"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Phone Number"
-            value={newPhone}
-            onChange={(e) => setNewPhone(e.target.value)}
-          />
-          <div className="modal-buttons">
-            <button className="success-btn" onClick={handleCreateCustomer}>
-              Save
-            </button>
-            <button className="danger-btn" onClick={() => setShowModal(false)}>
-              Cancel
-            </button>
-          </div>
-        </div>
+  <div className="modal-overlay" onClick={() => setShowModal(false)}>
+    <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+      <h2>Add New Customer</h2>
+      <p className="modal-subtext">Fill the details below to register a new customer.</p>
+      <input
+        type="text"
+        placeholder="Customer Name"
+        value={newName}
+        onChange={(e) => setNewName(e.target.value)}
+      />
+      <input
+        type="tel"
+        inputMode="numeric"
+        placeholder="Phone Number"
+        value={newPhone}
+        onChange={(e) => setNewPhone(e.target.value)}
+      />
+      <div className="modal-buttons">
+        <button className="success-btn" onClick={handleCreateCustomer}>
+          💾 Save
+        </button>
+        <button className="danger-btn" onClick={() => setShowModal(false)}>
+          ✖ Cancel
+        </button>
       </div>
-    )}
+    </div>
+  </div>
+)}
   </div>
 );
 }

@@ -205,6 +205,21 @@ body {
   font-weight: 600;
 }
 
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* === MODAL === */
 .modal-overlay {
   background: rgba(0, 0, 0, 0.5);
@@ -312,4 +327,95 @@ body {
 
 .card {
   padding-bottom: calc(16px + env(safe-area-inset-bottom, 0));
+}
+
+/* --- Enhanced Add Customer Modal --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  width: 90%;
+  max-width: 360px;
+  padding: 22px;
+  box-shadow: 0 6px 20px var(--shadow);
+  animation: popIn 0.3s ease;
+  text-align: center;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes popOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+/* Transition between open/close smoothly */
+.modal-card {
+  animation: popIn 0.25s ease forwards;
+}
+
+.modal-overlay.closing .modal-card {
+  animation: popOut 0.2s ease forwards;
+}
+
+
+.modal-card h2 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.modal-subtext {
+  margin: 6px 0 14px;
+  color: var(--subtext);
+  font-size: 0.9rem;
+}
+
+.modal-card input {
+  width: 100%;
+  padding: 12px;
+  font-size: var(--base);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #0f0f13;
+  color: var(--text);
+  margin-bottom: 12px;
+  outline: none;
+}
+
+.modal-card input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(199, 167, 91, 0.15);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
