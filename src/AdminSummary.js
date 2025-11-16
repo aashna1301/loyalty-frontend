@@ -27,17 +27,44 @@ function AdminSummary() {
   return (
     <div className="summary-container">
       <h1>📊 Admin Summary</h1>
+
       {summary ? (
-        <div className="summary-cards">
-          <div className="summary-card">
-            <h2>{summary.totalCustomers}</h2>
-            <p>Total Customers</p>
+        <>
+          <div className="summary-overview">
+            <div className="summary-box">
+              <h2>{summary.totalCustomers}</h2>
+              <p>Total Customers</p>
+            </div>
+            <div className="summary-box">
+              <h2>{summary.totalPoints}</h2>
+              <p>Total Points in System</p>
+            </div>
           </div>
-          <div className="summary-card">
-            <h2>{summary.totalPoints}</h2>
-            <p>Total Points in System</p>
+
+          <div className="table-wrapper">
+            <h3>Top Customers</h3>
+            <table className="summary-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Total Purchase (₹)</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {summary.customers.map((c, idx) => (
+                  <tr key={idx}>
+                    <td>{c.name}</td>
+                    <td>{c.phone}</td>
+                    <td>{c.totalPurchase.toLocaleString()}</td>
+                    <td>{c.points}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </div>
+        </>
       ) : (
         <p className="error-text">❌ Unable to load summary</p>
       )}
