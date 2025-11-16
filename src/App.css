@@ -1,281 +1,315 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+/* Modern, clean font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* === THEME VARIABLES === */
+:root {
+  --bg: #0b0b0c;
+  --card: #131316;
+  --text: #f3f4f6;
+  --subtext: #b5b8c1;
+  --accent: #c7a75b;
+  --accent-strong: #d9b967;
+  --border: #232329;
+  --shadow: rgba(0, 0, 0, 0.35);
+
+  /* Sizing and spacing */
+  --radius: 14px;
+  --tap: 46px;
+  --space: 12px;
+
+  /* Font scale */
+  --h1: 1.3rem;
+  --h2: 1.1rem;
+  --base: 0.95rem;
+}
+
+/* === GLOBAL RESET === */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  height: 100vh;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(900px 700px at 10% -10%, #16161a 30%, transparent 60%),
+    radial-gradient(700px 600px at 110% 10%, #111114 10%, transparent 60%), var(--bg);
+  color: var(--text);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  line-height: 1.45;
+  letter-spacing: 0.1px;
 }
 
+/* === CARD + CONTAINER === */
 .container {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  padding: 14px;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
-  padding: 40px;
-  border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 380px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px var(--shadow);
+  padding: 18px 20px 20px;
+  transition: box-shadow 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* --- Shop Branding --- */
+/* === HEADER === */
 .header {
-  margin-bottom: 25px;
+  text-align: center;
+  margin-bottom: 14px;
 }
 
 .shop-name {
-  font-size: 1.9rem;
-  color: #2c3e50;
+  font-size: var(--h1);
   margin: 0;
   letter-spacing: 0.5px;
-  font-weight: 600;
+  color: var(--text);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.shop-name::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 40%;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
 }
 
 .tagline {
-  color: #555;
-  font-style: italic;
-  font-size: 0.95rem;
-  margin-top: 5px;
-  opacity: 0.85;
+  margin: 6px 0 0;
+  font-size: 0.85rem;
+  color: var(--subtext);
+  letter-spacing: 0.3px;
 }
 
-/* --- Input Fields --- */
+/* === INPUT GROUP === */
 .input-group {
   display: flex;
-  justify-content: center;
-  margin: 10px 0;
+  gap: 10px;
+  margin: var(--space) 0;
 }
 
 .input-group input {
-  padding: 10px;
-  border: 1px solid #ddd;
+  flex: 1;
+  min-height: var(--tap);
+  font-size: var(--base);
+  color: var(--text);
+  background: #0e0e11;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  width: 70%;
+  padding: 10px 12px;
   outline: none;
-  transition: all 0.3s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-group input:focus {
-  border-color: #ff8a65;
-  box-shadow: 0 0 8px rgba(255, 152, 100, 0.3);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(199, 167, 91, 0.15);
 }
 
-/* --- Buttons --- */
-.primary-btn,
-.success-btn,
-.danger-btn {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  margin: 5px;
-  transition: all 0.3s ease;
-}
-
-.primary-btn {
-  background-color: #1976d2;
-  color: white;
-}
-
-.success-btn {
-  background-color: #43a047;
-  color: white;
-}
-
-.danger-btn {
-  background-color: #e53935;
-  color: white;
-}
-
-.primary-btn:hover,
-.success-btn:hover,
-.danger-btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
-/* --- Customer Info Card --- */
-.customer-card {
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  margin: 20px auto;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.customer-card h2 {
-  margin: 0;
-  font-weight: 600;
-  color: #1976d2;
-}
-
-.customer-card h3 {
-  margin: 10px 0 0;
-  color: #43a047;
-}
-
-/* --- Message --- */
-.message {
-  margin-top: 20px;
-  font-weight: 600;
-  color: #333;
-}
-
-.secondary-btn {
-  background-color: #8e44ad;
-  color: white;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.secondary-btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
-.new-customer-form {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.new-customer-form input {
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  width: 80%;
-}
-
-/* --- Modal Styling --- */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.modal {
-  background: white;
-  border-radius: 15px;
-  padding: 30px;
-  width: 300px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  animation: slideUp 0.3s ease-in-out;
-}
-
-.modal h2 {
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.modal input {
-  width: 85%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 15px;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-/* --- Step 3: mobile button sizing --- */
-:root {
-  --tap-size: 48px; /* minimum recommended touch height */
-}
-
+/* === BUTTONS === */
 .primary-btn,
 .success-btn,
 .danger-btn,
 .secondary-btn {
-  min-height: var(--tap-size);
-  font-size: 16px; /* prevents iOS zoom */
-  width: 100%;     /* make buttons full width on phones */
-  margin-top: 6px;
+  min-height: var(--tap);
+  font-size: var(--base);
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: #16161a;
+  cursor: pointer;
+  width: 100%;
+  transition: background 150ms ease, box-shadow 150ms ease;
 }
 
-/* --- Step 4: vertical input layout for small screens --- */
-@media (max-width: 480px) {
-  .input-group {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
+.primary-btn {
+  border-color: var(--accent);
+}
 
-  .input-group input {
-    width: 100%;
-    font-size: 16px;  /* avoids zoom on focus iOS */
-    min-height: 48px;
-  }
+.success-btn {
+  border-color: #2e7d32;
+}
 
-  .btn-group {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
+.danger-btn {
+  border-color: #aa3a35;
+}
 
-  .card {
-    padding: 22px;
-    width: 94%;
-    border-radius: 16px;
+.secondary-btn {
+  border-color: var(--border);
+}
+
+/* Soft glow hover */
+.primary-btn:hover,
+.success-btn:hover,
+.danger-btn:hover,
+.secondary-btn:hover {
+  box-shadow: 0 0 6px 1px rgba(199, 167, 91, 0.2);
+  background: #1a1a1d;
+}
+
+/* === CUSTOMER CARD === */
+.customer-card {
+  margin-top: 12px;
+  padding: 14px;
+  background: #0f0f13;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.customer-card h2 {
+  margin: 0 0 4px;
+  font-size: var(--h2);
+  color: var(--accent-strong);
+}
+
+.customer-card h3 {
+  margin: 6px 0 0;
+  color: var(--text);
+  font-size: var(--base);
+}
+
+.customer-card p {
+  margin: 2px 0;
+  color: var(--subtext);
+}
+
+/* === BUTTON GROUP === */
+.btn-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* === MESSAGES === */
+.message {
+  margin-top: 10px;
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+/* === MODAL === */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.modal input {
+  background: #0e0e11;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* === LOADING TEXT (if used) === */
+.loading-text {
+  color: var(--subtext);
+  font-weight: 600;
+  margin-top: 10px;
+  animation: fade 1.2s infinite ease-in-out;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
   }
 }
 
-/* --- Step 5: safe area padding & breathing space --- */
-body {
-  padding-bottom: env(safe-area-inset-bottom, 0); /* iPhone notch area */
+/* === STEP 3 — LAYOUT + FONT TUNING === */
+.card,
+.input-group,
+.customer-card,
+.btn-group,
+.message {
+  margin-bottom: var(--space);
 }
 
 .card {
-  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0));
+  line-height: 1.4;
 }
 
-.message {
-  margin-bottom: 12px;
+input,
+button {
+  font-family: inherit;
+}
+
+/* === MOBILE OPTIMIZATION === */
+@media (max-width: 480px) {
+  :root {
+    --h1: 1.15rem;
+    --h2: 1rem;
+    --base: 0.9rem;
+    --tap: 44px;
+    --space: 10px;
+  }
+
+  .card {
+    max-width: 360px;
+    padding: 14px 16px 18px;
+  }
+
+  .input-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-group {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .primary-btn,
+  .success-btn,
+  .danger-btn,
+  .secondary-btn {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .shop-name {
+    font-size: var(--h1);
+  }
+
+  .tagline {
+    font-size: 0.8rem;
+  }
+
+  .customer-card {
+    padding: 12px;
+  }
+}
+
+/* === SAFE AREA SUPPORT === */
+body {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.card {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0));
 }
