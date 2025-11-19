@@ -55,7 +55,6 @@ function App() {
       handleFetch();
       setAddAmount("");
     } catch (err) {
-      console.error("Error adding points:", err);
       setMessage("❌ Error adding points");
     }
   };
@@ -75,7 +74,6 @@ function App() {
       handleFetch();
       setRedeemPoints("");
     } catch (err) {
-      console.error("Error redeeming points:", err);
       setMessage("❌ Error redeeming points");
     }
   };
@@ -99,24 +97,36 @@ function App() {
     <div className="container">
       <div className="card">
 
-        {/* ADMIN SUMMARY PAGE */}
+        {/* === ADMIN MODE === */}
         {showAdmin ? (
-          <AdminSummary />
+          <>
+            {/* Back Button */}
+            <div className="admin-toggle-wrapper">
+              <button
+                className="admin-btn"
+                onClick={() => setShowAdmin(false)}
+              >
+                🏠 Back to Loyalty App
+              </button>
+            </div>
+
+            {/* Admin Summary Page */}
+            <AdminSummary />
+          </>
         ) : (
           <>
-            {/* 🌟 PREMIUM LOGO HEADER */}
+            {/* === LOGO HEADER === */}
             <div className="header">
               <div className="logo-wrapper">
                 <img src={logo} alt="Shop Logo" className="app-logo" />
               </div>
             </div>
 
-            {/* Phone Input */}
+            {/* === CHECK BALANCE === */}
             <div className="input-group">
               <input
                 type="tel"
                 inputMode="numeric"
-                autoComplete="tel"
                 maxLength={10}
                 placeholder="Enter phone number"
                 value={phone}
@@ -127,10 +137,12 @@ function App() {
               </button>
             </div>
 
+            {/* === ADD NEW CUSTOMER BUTTON === */}
             <button className="secondary-btn" onClick={() => setShowModal(true)}>
               ➕ Add New Customer
             </button>
 
+            {/* === CUSTOMER CARD === */}
             {customer && (
               <div className="customer-card">
                 <h2>{customer.name}</h2>
@@ -139,13 +151,12 @@ function App() {
               </div>
             )}
 
-            {/* Add Amount */}
+            {/* === ADD AMOUNT === */}
             <div className="section-group">
               <label className="section-label">💰 Add Amount</label>
               <div className="input-group">
                 <input
                   type="number"
-                  inputMode="numeric"
                   placeholder="Enter amount to add"
                   value={addAmount}
                   onChange={(e) => setAddAmount(e.target.value)}
@@ -156,13 +167,12 @@ function App() {
               </div>
             </div>
 
-            {/* Redeem */}
+            {/* === REDEEM === */}
             <div className="section-group">
               <label className="section-label">🎁 Redeem Points</label>
               <div className="input-group">
                 <input
                   type="number"
-                  inputMode="numeric"
                   placeholder="Enter points to redeem"
                   value={redeemPoints}
                   onChange={(e) => setRedeemPoints(e.target.value)}
@@ -180,34 +190,33 @@ function App() {
               </p>
             )}
 
-            {/* ADMIN BUTTON — NOW AT BOTTOM */}
+            {/* === ADMIN BUTTON AT BOTTOM === */}
             <div className="admin-toggle-wrapper">
               <button
                 className="admin-btn"
-                onClick={() => setShowAdmin(!showAdmin)}
+                onClick={() => setShowAdmin(true)}
               >
                 📊 View Admin Summary
               </button>
             </div>
-
           </>
         )}
       </div>
 
-      {/* MODAL */}
+      {/* === MODAL === */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <h2>Add New Customer</h2>
-            <p className="modal-subtext">
-              Enter customer details below.
-            </p>
+            <p className="modal-subtext">Enter customer details below.</p>
+
             <input
               type="text"
               placeholder="Customer Name"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
             />
+
             <input
               type="tel"
               inputMode="numeric"
@@ -215,6 +224,7 @@ function App() {
               value={newPhone}
               onChange={(e) => setNewPhone(e.target.value)}
             />
+
             <div className="modal-buttons">
               <button className="success-btn" onClick={handleCreateCustomer}>
                 💾 Save
