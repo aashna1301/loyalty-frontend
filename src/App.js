@@ -17,7 +17,6 @@ function App() {
 
   const backendURL = "https://loyalty-backend-zhzw.onrender.com/api";
 
-  // message auto-hide after 3 sec
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => setMessage(""), 3000);
@@ -25,7 +24,6 @@ function App() {
     }
   }, [message]);
 
-  // Fetch customer by phone
   const handleFetch = async () => {
     try {
       const res = await axios.get(`${backendURL}/customer/${phone}`);
@@ -42,7 +40,6 @@ function App() {
     }
   };
 
-  // Add points
   const handleAddPoints = async () => {
     if (!addAmount || !phone) {
       setMessage("⚠️ Please enter phone number and amount");
@@ -54,7 +51,6 @@ function App() {
         phone,
         amount: Number(addAmount),
       });
-
       setMessage("✅ Points added successfully!");
       handleFetch();
       setAddAmount("");
@@ -64,7 +60,6 @@ function App() {
     }
   };
 
-  // Redeem points
   const handleRedeem = async () => {
     if (!redeemPoints || !phone) {
       setMessage("⚠️ Please enter phone number and points");
@@ -76,7 +71,6 @@ function App() {
         phone,
         points: Number(redeemPoints),
       });
-
       setMessage("🎁 Points redeemed successfully!");
       handleFetch();
       setRedeemPoints("");
@@ -86,14 +80,12 @@ function App() {
     }
   };
 
-  // Create new customer
   const handleCreateCustomer = async () => {
     try {
       await axios.post(`${backendURL}/customers`, {
         name: newName,
         phone: newPhone,
       });
-
       setMessage(`🎉 New customer added: ${newName}`);
       setNewName("");
       setNewPhone("");
@@ -106,7 +98,8 @@ function App() {
   return (
     <div className="container">
       <div className="card">
-        {/* Toggle admin summary */}
+
+        {/* Toggle Admin Summary */}
         <button
           className="secondary-btn"
           onClick={() => setShowAdmin(!showAdmin)}
@@ -115,19 +108,18 @@ function App() {
           {showAdmin ? "🏠 Back to Loyalty App" : "📊 View Admin Summary"}
         </button>
 
-        {/* Admin View */}
         {showAdmin ? (
           <AdminSummary />
         ) : (
           <>
-            {/* HEADER WITH LOGO */}
+            {/* 🌟 ELEGANT LOGO-ONLY HEADER */}
             <div className="header">
-              <img src={logo} alt="Shop Logo" className="app-logo" />
-              <h1 className="shop-name">Gupta Showroom</h1>
-              <p className="tagline">A complete gift shop</p>
+              <div className="logo-wrapper">
+                <img src={logo} alt="Shop Logo" className="app-logo" />
+              </div>
             </div>
 
-            {/* Phone number input */}
+            {/* Phone Input */}
             <div className="input-group">
               <input
                 type="tel"
@@ -147,7 +139,6 @@ function App() {
               ➕ Add New Customer
             </button>
 
-            {/* Customer Card */}
             {customer && (
               <div className="customer-card">
                 <h2>{customer.name}</h2>
@@ -156,7 +147,7 @@ function App() {
               </div>
             )}
 
-            {/* ADD AMOUNT */}
+            {/* Add Amount */}
             <div className="section-group">
               <label className="section-label">💰 Add Amount</label>
               <div className="input-group">
@@ -173,7 +164,7 @@ function App() {
               </div>
             </div>
 
-            {/* REDEEM POINTS */}
+            {/* Redeem */}
             <div className="section-group">
               <label className="section-label">🎁 Redeem Points</label>
               <div className="input-group">
@@ -190,7 +181,7 @@ function App() {
               </div>
             </div>
 
-            {/* Message area */}
+            {/* Messages */}
             {message && (
               <p key={message} className="message fade-in">
                 {message}
@@ -200,7 +191,7 @@ function App() {
         )}
       </div>
 
-      {/* Add New Customer MODAL */}
+      {/* Modal */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
@@ -221,7 +212,6 @@ function App() {
               value={newPhone}
               onChange={(e) => setNewPhone(e.target.value)}
             />
-
             <div className="modal-buttons">
               <button className="success-btn" onClick={handleCreateCustomer}>
                 💾 Save
