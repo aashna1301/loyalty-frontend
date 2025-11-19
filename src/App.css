@@ -98,6 +98,15 @@ body {
   letter-spacing: 0.3px;
 }
 
+.app-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 6px rgba(199, 167, 91, 0.4));
+}
+
+
 /* === INPUT GROUP === */
 .input-group {
   display: flex;
