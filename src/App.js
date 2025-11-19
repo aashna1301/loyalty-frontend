@@ -99,20 +99,12 @@ function App() {
     <div className="container">
       <div className="card">
 
-        {/* Toggle Admin Summary */}
-        <button
-          className="secondary-btn"
-          onClick={() => setShowAdmin(!showAdmin)}
-          style={{ marginBottom: "10px" }}
-        >
-          {showAdmin ? "🏠 Back to Loyalty App" : "📊 View Admin Summary"}
-        </button>
-
+        {/* ADMIN SUMMARY PAGE */}
         {showAdmin ? (
           <AdminSummary />
         ) : (
           <>
-            {/* 🌟 ELEGANT LOGO-ONLY HEADER */}
+            {/* 🌟 PREMIUM LOGO HEADER */}
             <div className="header">
               <div className="logo-wrapper">
                 <img src={logo} alt="Shop Logo" className="app-logo" />
@@ -187,17 +179,28 @@ function App() {
                 {message}
               </p>
             )}
+
+            {/* ADMIN BUTTON — NOW AT BOTTOM */}
+            <div className="admin-toggle-wrapper">
+              <button
+                className="admin-btn"
+                onClick={() => setShowAdmin(!showAdmin)}
+              >
+                📊 View Admin Summary
+              </button>
+            </div>
+
           </>
         )}
       </div>
 
-      {/* Modal */}
+      {/* MODAL */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <h2>Add New Customer</h2>
             <p className="modal-subtext">
-              Fill the details below to register a new customer.
+              Enter customer details below.
             </p>
             <input
               type="text"

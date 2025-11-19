@@ -29,53 +29,49 @@
 
 body {
   margin: 0;
-  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  line-height: 1.45;
 }
 
 /* === FULL WIDTH CONTAINER === */
 .container {
   width: 100%;
   padding: 14px;
-  display: flex;
-  justify-content: center;
 }
 
-/* === CARD (FULL WIDTH ON MOBILE) === */
+/* === CARD (100% WIDTH ON MOBILE) === */
 .card {
   width: 100%;
-  max-width: 500px;       /* Increased for full-width feel */
+  max-width: none; /* 🔥 remove block look */
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 0; /* flush edges for mobile app look */
   padding: 20px;
-  box-shadow: 0 8px 24px var(--shadow);
+  box-shadow: none;
 }
 
-/* === LOGO-ONLY HEADER === */
+/* === LOGO HEADER === */
 .logo-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
 .app-logo {
-  width: 95px;
-  height: 95px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 50%;
   background: #0d0d0f;
-  padding: 6px;
+  padding: 8px;
   border: 2px solid var(--accent);
-  box-shadow: 0 0 10px rgba(199, 167, 91, 0.35);
+  box-shadow: 0 0 12px rgba(199, 167, 91, 0.45);
 }
 
-/* === INPUT GROUP (FULL WIDTH) === */
+/* === INPUT GROUP === */
 .input-group {
   width: 100%;
   display: flex;
@@ -98,7 +94,8 @@ body {
 .primary-btn,
 .success-btn,
 .danger-btn,
-.secondary-btn {
+.secondary-btn,
+.admin-btn {
   width: 100%;
   min-height: var(--tap);
   font-size: var(--base);
@@ -107,14 +104,17 @@ body {
   border: 1px solid var(--border);
   background: #16161a;
   color: var(--text);
+  margin-bottom: 14px;
 }
 
 .primary-btn {
   border-color: var(--accent);
 }
+
 .success-btn {
   border-color: #2e7d32;
 }
+
 .danger-btn {
   border-color: #aa3a35;
 }
@@ -126,24 +126,24 @@ body {
   border: 1px solid var(--border);
   padding: 14px;
   border-radius: 12px;
+  margin-bottom: 10px;
 }
 
 /* === SECTION GROUP === */
 .section-group {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
 .section-label {
   font-size: 0.9rem;
-  display: block;
   margin-bottom: 6px;
   color: var(--subtext);
 }
 
 /* === MESSAGES === */
 .message {
-  margin-top: 10px;
+  margin-top: 12px;
   text-align: center;
   color: var(--accent-strong);
   font-weight: 600;
@@ -152,6 +152,7 @@ body {
 .fade-in {
   animation: fadeIn 0.4s ease;
 }
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
@@ -177,10 +178,21 @@ body {
   padding: 20px;
 }
 
+/* === ADMIN SUMMARY BUTTON AT BOTTOM === */
+.admin-toggle-wrapper {
+  margin-top: 25px;
+  width: 100%;
+}
+
+.admin-btn {
+  border-color: var(--accent);
+  background: #1a1a1d;
+}
+
 /* === MOBILE RESPONSIVE === */
 @media (max-width: 480px) {
   .card {
-    max-width: 100%;
+    border-radius: 0;
     padding: 18px;
   }
 
