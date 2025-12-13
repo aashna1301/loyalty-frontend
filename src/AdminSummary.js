@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminSummary.css";
 
-const backendURL = "https://loyalty-backend-zhzw.onrender.com/api";
+const backendURL = "https://loyalty-backend-production-25b3.up.railway.app/api";
 
 function AdminSummary() {
   const [summary, setSummary] = useState(null);
