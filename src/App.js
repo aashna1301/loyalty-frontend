@@ -18,7 +18,8 @@ function App() {
   const [newPhone, setNewPhone] = useState("");
   const [showAdmin, setShowAdmin] = useState(false);
 
-  const backendURL = "https://loyalty-backend-zhzw.onrender.com/api";
+  const backendURL = "https://loyalty-backend-production-25b3.up.railway.app/api";
+  
 
   useEffect(() => {
     if (message) {
