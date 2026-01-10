@@ -1,0 +1,214 @@
+/* Modern, clean font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* === THEME VARIABLES === */
+:root {
+  --bg: #0b0b0c;
+  --card: #131316;
+  --text: #f3f4f6;
+  --subtext: #b5b8c1;
+  --accent: #c7a75b;
+  --accent-strong: #d9b967;
+  --border: #232329;
+  --shadow: rgba(0, 0, 0, 0.35);
+
+  --radius: 14px;
+  --tap: 46px;
+  --space: 12px;
+
+  --h1: 1.3rem;
+  --h2: 1.1rem;
+  --base: 0.95rem;
+}
+
+/* === GLOBAL RESET === */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* === FULL WIDTH CONTAINER === */
+.container {
+  width: 100%;
+  padding: 14px;
+}
+
+/* === CARD (100% WIDTH ON MOBILE) === */
+.card {
+  width: 100%;
+  max-width: none; /* 🔥 remove block look */
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0; /* flush edges for mobile app look */
+  padding: 20px;
+  box-shadow: none;
+}
+
+/* === LOGO HEADER === */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.app-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #0d0d0f;
+  padding: 8px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 12px rgba(199, 167, 91, 0.45);
+}
+
+/* === INPUT GROUP === */
+.input-group {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin: var(--space) 0;
+}
+
+.input-group input {
+  width: 100%;
+  min-height: var(--tap);
+  font-size: var(--base);
+  color: var(--text);
+  background: #0e0e11;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+/* === BUTTONS === */
+.primary-btn,
+.success-btn,
+.danger-btn,
+.secondary-btn,
+.admin-btn {
+  width: 100%;
+  min-height: var(--tap);
+  font-size: var(--base);
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #16161a;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.primary-btn {
+  border-color: var(--accent);
+}
+
+.success-btn {
+  border-color: #2e7d32;
+}
+
+.danger-btn {
+  border-color: #aa3a35;
+}
+
+/* === CUSTOMER CARD === */
+.customer-card {
+  width: 100%;
+  background: #0f0f13;
+  border: 1px solid var(--border);
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+/* === SECTION GROUP === */
+.section-group {
+  width: 100%;
+  margin-top: 14px;
+}
+
+.section-label {
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: var(--subtext);
+}
+
+/* === MESSAGES === */
+.message {
+  margin-top: 12px;
+  text-align: center;
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === MODAL === */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-card {
+  width: 90%;
+  max-width: 360px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+/* === ADMIN SUMMARY BUTTON AT BOTTOM === */
+.admin-toggle-wrapper {
+  margin-top: 25px;
+  width: 100%;
+}
+
+.admin-btn {
+  border-color: var(--accent);
+  background: #1a1a1d;
+}
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 480px) {
+  .card {
+    border-radius: 0;
+    padding: 18px;
+  }
+
+  .input-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .primary-btn,
+  .success-btn,
+  .danger-btn,
+  .secondary-btn {
+    font-size: 0.9rem;
+  }
+
+  .customer-card {
+    padding: 12px;
+  }
+}
